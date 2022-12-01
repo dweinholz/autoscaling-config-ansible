@@ -9,17 +9,14 @@
     state: directory
   become_user: "{{ autoscaling_user }}"
 
-- name: Check if {{ autoscaling_env }}  already installed
-  stat:
-    path: "{{ autoscaling_home }}/{{ autoscaling_env }}"
-  register: virtualenv_installed
+- name: Create the initial virtualenv
+  ansible.builtin.shell: /usr/bin/python3.9 -m venv "{{ autoscaling_home }}/{{ autoscaling_env }}"
+  args:
+    executable: /bin/bash
+    creates: "{{ autoscaling_home }}/{{ autoscaling_env }}"
+  when: virtualenv_installed.stat.exists == False
 
-- name: Install requirements
-  become_user: "{{ autoscaling_user }}"       
-  pip: 
-        virtualenv: "{{ autoscaling_home }}/{{ autoscaling_env }}"
-        virtualenv_python: python3.9
-        
+    
 - name: Install pip packages
   pip:
     name: [cython,requests,pyyaml,pandas,numpy,matplotlib]
