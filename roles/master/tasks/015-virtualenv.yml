@@ -15,7 +15,7 @@
   register: virtualenv_installed
 
 - name: Create the initial virtualenv
-  ansible.builtin.shell: /usr/bin/python3 -m venv "{{ autoscaling_home }}/{{ autoscaling_env }}"
+  ansible.builtin.shell: python -m venv "{{ autoscaling_home }}/{{ autoscaling_env }}"
   args:
     executable: /bin/bash
     creates: "{{ autoscaling_home }}/{{ autoscaling_env }}"
