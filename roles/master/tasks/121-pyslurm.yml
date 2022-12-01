@@ -10,7 +10,6 @@
     version: slurm-20.11.8
     force: yes
     update: yes
-  become_user: "{{ autoscaling_user }}"
   when: pyslurm_installed is failed
 
 - name: Change slurmfull to slurm
@@ -18,7 +17,6 @@
   args:
     executable: /bin/bash
   run_once: true
-  become_user: "{{ autoscaling_user }}"
   when: pyslurm_installed is failed
 
 - name: Pyslurm build
@@ -26,7 +24,6 @@
   args:
     executable: /bin/bash
   run_once: true
-  become_user: "{{ autoscaling_user }}"
   when: pyslurm_installed is failed
 
 - name: Pyslurm install
@@ -34,5 +31,4 @@
   args:
     executable: /bin/bash
   run_once: true
-  become_user: "{{ autoscaling_user }}"
   when: pyslurm_installed is failed
