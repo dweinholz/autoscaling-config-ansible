@@ -1,6 +1,6 @@
 - name: Install virtualenv packages
   apt:
-    name: [ python3-venv ]
+    name: [ python3.9-venv ]
     state: latest
 
 - name: Creates directory
